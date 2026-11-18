@@ -50,6 +50,42 @@ footer{overflow:hidden}
 footer:before{content:"";display:block;width:100px;height:2px;background:linear-gradient(90deg,transparent,#d9ad58,transparent);margin:0 auto 18px;animation:footerGlow 3s infinite}
 @keyframes footerGlow{0%,100%{opacity:.4;transform:scaleX(.7)}50%{opacity:1;transform:scaleX(1.5)}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+
+
+/* ===== بسته انیمیشن‌های تکمیلی ===== */
+html{scroll-padding-top:90px}
+body:before{content:"";position:fixed;inset:-30%;z-index:-1;pointer-events:none;background:radial-gradient(circle at 20% 30%,#d9ad580c,transparent 25%),radial-gradient(circle at 80% 70%,#4169a10c,transparent 28%);animation:bgDrift 22s ease-in-out infinite alternate}
+@keyframes bgDrift{0%{transform:translate3d(-2%,0,0) rotate(0)}100%{transform:translate3d(2%,-2%,0) rotate(5deg)}}
+.logo{display:inline-block;animation:logoFloat 4s ease-in-out infinite;text-shadow:0 0 18px #f0ca7d30}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.hero{background-size:150% 150%;animation:heroGradient 12s ease infinite alternate}
+@keyframes heroGradient{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.hero:after{box-shadow:0 0 55px #d9ad5815,inset 0 0 45px #d9ad580a}
+.section-title h2{position:relative;display:inline-block}
+.section-title h2:after{content:"";position:absolute;right:0;bottom:-8px;width:55%;height:3px;border-radius:5px;background:linear-gradient(90deg,#d9ad58,transparent);transform-origin:right;animation:titleLine 1s .2s both}
+@keyframes titleLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.card,.event,.sources{position:relative;overflow:hidden}
+.card:before,.event:before,.sources:before{content:"";position:absolute;top:0;left:-130%;width:65%;height:100%;pointer-events:none;background:linear-gradient(110deg,transparent,#d9ad5810,transparent);transform:skewX(-18deg);transition:left .8s ease}
+.card:hover:before,.event:hover:before,.sources:hover:before{left:150%}
+.card h3{transition:transform .25s,color .25s}
+.card:hover h3{transform:translateX(-3px);color:#b18432}
+.event[open] summary{color:#b18432}
+.event[open] p{animation:riseIn .45s both}
+.option:has(input:checked){border-color:#d9ad58;background:#d9ad5815;box-shadow:inset -3px 0 #d9ad58}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #d9ad58;outline-offset:3px}
+.creator{position:relative;overflow:hidden}
+.creator:after{content:"";position:absolute;inset:0;transform:translateX(-120%);background:linear-gradient(100deg,transparent,#fff5,transparent);animation:badgeShine 5s 2s infinite}
+@keyframes badgeShine{0%,65%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+#scrollProgress{position:fixed;top:0;right:0;height:3px;width:0;background:linear-gradient(90deg,#f0ca7d,#d9ad58);z-index:20;box-shadow:0 0 12px #d9ad58;pointer-events:none}
+#backToTop{position:fixed;left:18px;bottom:18px;width:44px;height:44px;border:1px solid #d9ad58;background:#101d36;color:#f0ca7d;border-radius:50%;font-size:20px;opacity:0;visibility:hidden;transform:translateY(12px);transition:.3s;z-index:10;box-shadow:0 8px 22px #101d3640}
+#backToTop.show{opacity:1;visibility:visible;transform:translateY(0)}
+#backToTop:hover{transform:translateY(-5px) rotate(-8deg);box-shadow:0 12px 25px #d9ad5850}
+@keyframes gentleBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.grid .card:nth-child(2n){animation-delay:.08s}
+.grid .card:nth-child(3n){animation-delay:.16s}
+.result{box-shadow:0 8px 25px #d9ad5818}
+@media(max-width:700px){#backToTop{left:12px;bottom:12px}}
+
 </style></head><body><canvas id="particleCanvas" aria-hidden="true"></canvas><header><div class="nav"><div class="logo">🛡️ آمادگی دفاعی</div><nav><button class="active" onclick="showPage('home',this)">خانه</button><button onclick="showPage('events',this)">جنگ‌ها و نبردها</button><button onclick="showPage('analysis',this)">تحلیل</button><button onclick="showPage('lessons',this)">درس‌آموخته‌ها</button><button onclick="showPage('quiz',this)">آزمون</button><button onclick="showPage('about',this)">درباره ما</button></nav><button class="theme" onclick="document.body.classList.toggle('dark')">🌙 تغییر پوسته</button></div></header>
 <section class="hero"><h1>آمادگی دفاعی؛ آگاهی، امنیت، آینده</h1><p>دانشنامه آموزشی تاریخ دفاعی ایران، جنگ‌ها و نبردها، امنیت ملی و اهمیت صلح و آگاهی.</p><div class="creator">✦ طراح سایت: محمد مهدی عباسی ✦</div><p><button class="btn" onclick="showPage('events')">مطالعه جنگ‌ها</button><button class="btn" onclick="showPage('quiz')">شرکت در آزمون</button></p></section>
 <main class="container"><section id="home" class="section active"><div class="section-title"><h2>به وب‌سایت آمادگی دفاعی خوش آمدید</h2><p>شناخت تاریخ، بررسی منصفانه منابع و آگاهی، پایه‌های جامعه‌ای آماده و صلح‌طلب هستند.</p></div><div class="grid"><div class="card"><h3>📜 دانشنامه تاریخ دفاعی</h3><p>مجموعه‌ای از نبردها و جنگ‌های مهم ایران از دوران باستان تا معاصر.</p><button class="btn" onclick="showPage('events')">مطالعه</button></div><div class="card"><h3>🔎 تحلیل تاریخی</h3><p>بررسی عوامل سیاسی، جغرافیایی و اقتصادی جنگ‌ها.</p><button class="btn" onclick="showPage('analysis')">مشاهده</button></div><div class="card"><h3>🎓 آزمون</h3><p>دانسته‌های خود را بسنجید.</p><button class="btn" onclick="showPage('quiz')">شروع</button></div></div></section>
@@ -174,6 +210,36 @@ setupReveal();
   }
   resize();window.addEventListener('resize',resize,{passive:true});
   draw();
+})();
+
+
+
+// نوار پیشرفت مطالعه و دکمه بازگشت به بالای صفحه
+(function(){
+  const bar=document.createElement('div');bar.id='scrollProgress';document.body.appendChild(bar);
+  const top=document.createElement('button');top.id='backToTop';top.type='button';top.title='بازگشت به بالا';top.setAttribute('aria-label','بازگشت به بالای صفحه');top.textContent='↑';document.body.appendChild(top);
+  function update(){const max=document.documentElement.scrollHeight-innerHeight;bar.style.width=(max>0?(scrollY/max)*100:0)+'%';top.classList.toggle('show',scrollY>420)}
+  addEventListener('scroll',update,{passive:true});addEventListener('resize',update,{passive:true});top.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));update();
+})();
+
+// ورود پلکانی کارت‌ها و عناصر فهرست برای جلوه پویاتر
+(function(){
+  if(!('IntersectionObserver' in window))return;
+  const io=new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(e.isIntersecting){e.target.style.transitionDelay=Math.min((Array.from(e.target.parentElement.children).indexOf(e.target)%5)*70,280)+'ms';e.target.classList.add('visible');io.unobserve(e.target)}
+  }),{threshold:.06});
+  document.querySelectorAll('.grid .card,.event').forEach(el=>io.observe(el));
+})();
+
+// جلوه موجی کوچک هنگام کلیک روی دکمه‌ها
+(function(){
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b||b.classList.contains('theme')||b.id==='backToTop')return;
+    const r=b.getBoundingClientRect(),wave=document.createElement('span');
+    wave.style.cssText='position:absolute;pointer-events:none;border-radius:50%;width:12px;height:12px;background:#fff8;left:'+(e.clientX-r.left-6)+'px;top:'+(e.clientY-r.top-6)+'px;transform:scale(0);animation:clickWave .55s ease-out forwards';
+    if(getComputedStyle(b).position==='static')b.style.position='relative';b.style.overflow='hidden';b.appendChild(wave);setTimeout(()=>wave.remove(),600);
+  });
+  const st=document.createElement('style');st.textContent='@keyframes clickWave{to{transform:scale(18);opacity:0}}';document.head.appendChild(st);
 })();
 
 </script></body></html>
