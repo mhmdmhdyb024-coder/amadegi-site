@@ -86,6 +86,14 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #d9ad
 .result{box-shadow:0 8px 25px #d9ad5818}
 @media(max-width:700px){#backToTop{left:12px;bottom:12px}}
 
+
+/* ===== شمشیر دنبال‌کننده نشانگر موس ===== */
+#swordFollower{position:fixed;left:0;top:0;width:58px;height:58px;z-index:9998;pointer-events:none;opacity:0;transform:translate3d(-100px,-100px,0) rotate(-35deg);filter:drop-shadow(0 0 7px #f0ca7d99);will-change:transform;transition:opacity .18s ease}
+#swordFollower.visible{opacity:1}
+#swordFollower:after{content:"";position:absolute;width:24px;height:24px;left:5px;bottom:2px;border-radius:50%;background:#f0ca7d55;filter:blur(12px);z-index:-1}
+@media(hover:none),(pointer:coarse){#swordFollower{display:none}}
+@media(prefers-reduced-motion:reduce){#swordFollower{display:none}}
+
 </style></head><body><canvas id="particleCanvas" aria-hidden="true"></canvas><header><div class="nav"><div class="logo">🛡️ آمادگی دفاعی</div><nav><button class="active" onclick="showPage('home',this)">خانه</button><button onclick="showPage('events',this)">جنگ‌ها و نبردها</button><button onclick="showPage('analysis',this)">تحلیل</button><button onclick="showPage('lessons',this)">درس‌آموخته‌ها</button><button onclick="showPage('quiz',this)">آزمون</button><button onclick="showPage('about',this)">درباره ما</button></nav><button class="theme" onclick="document.body.classList.toggle('dark')">🌙 تغییر پوسته</button></div></header>
 <section class="hero"><h1>آمادگی دفاعی؛ آگاهی، امنیت، آینده</h1><p>دانشنامه آموزشی تاریخ دفاعی ایران، جنگ‌ها و نبردها، امنیت ملی و اهمیت صلح و آگاهی.</p><div class="creator">✦ طراح سایت: محمد مهدی عباسی ✦</div><p><button class="btn" onclick="showPage('events')">مطالعه جنگ‌ها</button><button class="btn" onclick="showPage('quiz')">شرکت در آزمون</button></p></section>
 <main class="container"><section id="home" class="section active"><div class="section-title"><h2>به وب‌سایت آمادگی دفاعی خوش آمدید</h2><p>شناخت تاریخ، بررسی منصفانه منابع و آگاهی، پایه‌های جامعه‌ای آماده و صلح‌طلب هستند.</p></div><div class="grid"><div class="card"><h3>📜 دانشنامه تاریخ دفاعی</h3><p>مجموعه‌ای از نبردها و جنگ‌های مهم ایران از دوران باستان تا معاصر.</p><button class="btn" onclick="showPage('events')">مطالعه</button></div><div class="card"><h3>🔎 تحلیل تاریخی</h3><p>بررسی عوامل سیاسی، جغرافیایی و اقتصادی جنگ‌ها.</p><button class="btn" onclick="showPage('analysis')">مشاهده</button></div><div class="card"><h3>🎓 آزمون</h3><p>دانسته‌های خود را بسنجید.</p><button class="btn" onclick="showPage('quiz')">شروع</button></div></div></section>
@@ -240,6 +248,33 @@ setupReveal();
     if(getComputedStyle(b).position==='static')b.style.position='relative';b.style.overflow='hidden';b.appendChild(wave);setTimeout(()=>wave.remove(),600);
   });
   const st=document.createElement('style');st.textContent='@keyframes clickWave{to{transform:scale(18);opacity:0}}';document.head.appendChild(st);
+})();
+
+
+// شمشیر طلایی کوچک که با حرکت موس، نرم دنبال نشانگر می‌آید
+(function(){
+  const finePointer=window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!finePointer||reduced)return;
+  const sword=document.createElement('div');
+  sword.id='swordFollower';
+  sword.setAttribute('aria-hidden','true');
+  sword.innerHTML='<svg viewBox="0 0 64 64" width="58" height="58" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bladeGold" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#9b6a22"/><stop offset=".45" stop-color="#fff1b5"/><stop offset="1" stop-color="#c28b32"/></linearGradient><linearGradient id="gripGold"><stop stop-color="#55351c"/><stop offset=".5" stop-color="#d9ad58"/><stop offset="1" stop-color="#6d421c"/></linearGradient></defs><path d="M31 7 L40 16 L22 43 L17 38 Z" fill="url(#bladeGold)" stroke="#fff0b0" stroke-width="1.2"/><path d="M31 7 L35 11 L20 39 L17 38 Z" fill="#fff8d8" opacity=".65"/><path d="M17 36 L27 46 L22 51 L12 41 Z" fill="url(#gripGold)" stroke="#f5d58b" stroke-width="1.2"/><path d="M10 43 L20 53" stroke="#f5d58b" stroke-width="4" stroke-linecap="round"/><path d="M8 51 L14 57" stroke="#9b6a22" stroke-width="5" stroke-linecap="round"/><circle cx="17" cy="42" r="2" fill="#fff2bd"/></svg>';
+  document.body.appendChild(sword);
+  let targetX=-100,targetY=-100,x=-100,y=-100,raf=0;
+  function frame(){
+    x+=(targetX-x)*.24;y+=(targetY-y)*.24;
+    sword.style.transform='translate3d('+(x-29)+'px,'+(y-29)+'px,0) rotate(-35deg)';
+    if(Math.abs(targetX-x)>.2||Math.abs(targetY-y)>.2){raf=requestAnimationFrame(frame)}else{raf=0}
+  }
+  window.addEventListener('pointermove',function(e){
+    if(e.pointerType!=='mouse')return;
+    targetX=e.clientX+18;targetY=e.clientY+18;
+    sword.classList.add('visible');
+    if(!raf)raf=requestAnimationFrame(frame);
+  },{passive:true});
+  document.addEventListener('pointerleave',function(){sword.classList.remove('visible')});
+  window.addEventListener('blur',function(){sword.classList.remove('visible')});
 })();
 
 </script></body></html>
