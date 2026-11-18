@@ -196,6 +196,3 @@ if __name__ == "__main__":
     print("سایت آمادگی دفاعی فعال شد!")
     print(f"Port: {port}")
     server.serve_forever()
-
-
-
