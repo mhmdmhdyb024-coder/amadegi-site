@@ -4,7 +4,53 @@ import os
 PAGE = r'''
 <!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101d36"><meta name="description" content="دانشنامه آموزشی جنگ‌ها و نبردهای تاریخ ایران"><title>آمادگی دفاعی | محمد مهدی عباسی</title><style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap');:root{--bg:#f3f5fa;--card:#fff;--text:#17233c;--muted:#66738a;--navy:#101d36;--gold:#d9ad58;--border:#e5e9f0}body.dark{--bg:#101827;--card:#1a263a;--text:#f1f4fa;--muted:#b2bfd2;--border:#2b3a51}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Vazirmatn,Tahoma,sans-serif;background:var(--bg);color:var(--text)}header{background:linear-gradient(120deg,#0b1529,#1b3155);color:white;padding:15px 4%;position:sticky;top:0;z-index:5}.nav{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.logo{font-weight:800;color:#f0ca7d;font-size:20px}nav{display:flex;gap:4px;flex-wrap:wrap}button{font-family:inherit;cursor:pointer}nav button,.theme{background:transparent;color:white;border:1px solid #ffffff30;border-radius:9px;padding:9px 12px}nav button.active,nav button:hover{color:#f0ca7d;background:#ffffff20}.hero{text-align:center;padding:65px 6%;background:radial-gradient(circle at 15% 20%,#d9ad5830,transparent 25%),linear-gradient(120deg,#101d36,#243e68);color:white}.hero h1{font-size:clamp(27px,5vw,44px);margin:0 0 12px}.hero p{line-height:2.2;color:#d8e0ee;max-width:750px;margin:auto}.creator{display:inline-block;margin-top:18px;padding:8px 20px;border:1px solid #d9ad58;border-radius:30px;color:#f3d18e}.container{width:min(1100px,93%);margin:35px auto}.section{display:none}.section.active{display:block;animation:fade .25s}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}.section-title{margin-bottom:22px}.section-title h2{font-size:26px}.section-title p,.card p,.event p{color:var(--muted);line-height:2}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.card,.event,.sources{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:20px;margin-bottom:13px;box-shadow:0 5px 18px #17233c09}.btn{background:var(--gold);color:#17233c;border:0;border-radius:9px;padding:11px 18px;font-weight:700;margin:5px}.search{width:100%;padding:13px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font:inherit;margin:0 0 18px}.event summary{cursor:pointer;font-weight:700;line-height:1.9}.event[open]{border-color:var(--gold)}.sources h2{margin-top:0}.sources li{line-height:2.2;margin:8px 0}a{color:#b18432}body.dark a{color:#f0ca7d}.small{font-size:13px;color:var(--muted)}.question{margin:18px 0}.option{display:block;padding:9px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin:7px 0}.result{display:none;padding:15px;background:#d9ad5820;border-radius:10px;line-height:2}footer{background:#101d36;color:#d8e0ee;text-align:center;padding:27px;line-height:2;margin-top:45px}footer strong{color:#f0ca7d}@media(max-width:700px){.nav{justify-content:center}.logo{width:100%;text-align:center}nav{justify-content:center}nav button{font-size:12px;padding:7px}}
-</style></head><body><header><div class="nav"><div class="logo">🛡️ آمادگی دفاعی</div><nav><button class="active" onclick="showPage('home',this)">خانه</button><button onclick="showPage('events',this)">جنگ‌ها و نبردها</button><button onclick="showPage('analysis',this)">تحلیل</button><button onclick="showPage('lessons',this)">درس‌آموخته‌ها</button><button onclick="showPage('quiz',this)">آزمون</button><button onclick="showPage('about',this)">درباره ما</button></nav><button class="theme" onclick="document.body.classList.toggle('dark')">🌙 تغییر پوسته</button></div></header>
+
+/* ===== انیمیشن‌های پیشرفته ===== */
+:root{--glow:rgba(217,173,88,.28)}
+body{overflow-x:hidden}
+header{backdrop-filter:blur(14px);box-shadow:0 8px 28px #07132635}
+.hero{position:relative;isolation:isolate;overflow:hidden}
+.hero:before,.hero:after{content:"";position:absolute;z-index:-1;border:1px solid #f0ca7d35;border-radius:50%;width:360px;height:360px;animation:orbit 18s linear infinite}
+.hero:before{top:-230px;right:-100px;box-shadow:0 0 70px #d9ad5820}
+.hero:after{bottom:-290px;left:-80px;width:430px;height:430px;animation-direction:reverse}
+.hero h1{animation:heroTitle 1s cubic-bezier(.2,.8,.2,1) both;text-shadow:0 8px 30px #0005}
+.hero p,.creator{animation:riseIn 1s .18s both}
+.creator{box-shadow:0 0 0 0 var(--glow);animation:riseIn 1s .18s both,softPulse 3s 1.2s infinite}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes heroTitle{from{opacity:0;transform:translateY(25px) scale(.97);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes softPulse{0%,100%{box-shadow:0 0 0 0 #d9ad5800}50%{box-shadow:0 0 0 9px #d9ad5812}}
+.card,.event,.sources{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .35s;transform-style:preserve-3d}
+.card:hover,.event:hover,.sources:hover{transform:translateY(-6px);box-shadow:0 18px 38px #101d3620;border-color:#d9ad58}
+.btn{position:relative;overflow:hidden;transition:transform .2s,box-shadow .25s,filter .25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 9px 22px #d9ad5850;filter:saturate(1.15)}
+.btn:active{transform:scale(.96)}
+.btn:after{content:"";position:absolute;top:-60%;left:-80%;width:45%;height:220%;background:linear-gradient(90deg,transparent,#fff9,transparent);transform:rotate(25deg);transition:left .65s}
+.btn:hover:after{left:140%}
+nav button,.theme{transition:background .25s,color .25s,transform .2s,border-color .25s}
+nav button:hover,.theme:hover{transform:translateY(-2px);border-color:#d9ad58}
+.search{transition:box-shadow .25s,border-color .25s,transform .25s}
+.search:focus{outline:none;border-color:#d9ad58;box-shadow:0 0 0 4px #d9ad5825;transform:translateY(-2px)}
+.event{transition:all .3s}
+.event[open]{box-shadow:0 12px 28px #d9ad5820}
+.event summary{transition:color .2s}
+.event summary:hover{color:#b18432}
+.section.active{animation:sectionIn .5s cubic-bezier(.2,.8,.2,1) both}
+@keyframes sectionIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.visible{opacity:1;transform:none}
+#particleCanvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:.42}
+header,main,.hero,.sources,footer{position:relative}
+header,.hero,main,.sources,footer{z-index:1}
+body.dark #particleCanvas{opacity:.24}
+.result{animation:riseIn .45s both;border:1px solid #d9ad5860}
+.option{transition:transform .2s,border-color .2s,background .2s}
+.option:hover{transform:translateX(-4px);border-color:#d9ad58;background:var(--card)}
+footer{overflow:hidden}
+footer:before{content:"";display:block;width:100px;height:2px;background:linear-gradient(90deg,transparent,#d9ad58,transparent);margin:0 auto 18px;animation:footerGlow 3s infinite}
+@keyframes footerGlow{0%,100%{opacity:.4;transform:scaleX(.7)}50%{opacity:1;transform:scaleX(1.5)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+</style></head><body><canvas id="particleCanvas" aria-hidden="true"></canvas><header><div class="nav"><div class="logo">🛡️ آمادگی دفاعی</div><nav><button class="active" onclick="showPage('home',this)">خانه</button><button onclick="showPage('events',this)">جنگ‌ها و نبردها</button><button onclick="showPage('analysis',this)">تحلیل</button><button onclick="showPage('lessons',this)">درس‌آموخته‌ها</button><button onclick="showPage('quiz',this)">آزمون</button><button onclick="showPage('about',this)">درباره ما</button></nav><button class="theme" onclick="document.body.classList.toggle('dark')">🌙 تغییر پوسته</button></div></header>
 <section class="hero"><h1>آمادگی دفاعی؛ آگاهی، امنیت، آینده</h1><p>دانشنامه آموزشی تاریخ دفاعی ایران، جنگ‌ها و نبردها، امنیت ملی و اهمیت صلح و آگاهی.</p><div class="creator">✦ طراح سایت: محمد مهدی عباسی ✦</div><p><button class="btn" onclick="showPage('events')">مطالعه جنگ‌ها</button><button class="btn" onclick="showPage('quiz')">شرکت در آزمون</button></p></section>
 <main class="container"><section id="home" class="section active"><div class="section-title"><h2>به وب‌سایت آمادگی دفاعی خوش آمدید</h2><p>شناخت تاریخ، بررسی منصفانه منابع و آگاهی، پایه‌های جامعه‌ای آماده و صلح‌طلب هستند.</p></div><div class="grid"><div class="card"><h3>📜 دانشنامه تاریخ دفاعی</h3><p>مجموعه‌ای از نبردها و جنگ‌های مهم ایران از دوران باستان تا معاصر.</p><button class="btn" onclick="showPage('events')">مطالعه</button></div><div class="card"><h3>🔎 تحلیل تاریخی</h3><p>بررسی عوامل سیاسی، جغرافیایی و اقتصادی جنگ‌ها.</p><button class="btn" onclick="showPage('analysis')">مشاهده</button></div><div class="card"><h3>🎓 آزمون</h3><p>دانسته‌های خود را بسنجید.</p><button class="btn" onclick="showPage('quiz')">شروع</button></div></div></section>
 <section id="events" class="section"><div class="section-title"><h2>دانشنامه جنگ‌ها و نبردهای تاریخ ایران</h2><p>این مجموعه رویدادهای مهم و مستند را دربرمی‌گیرد؛ همه درگیری‌های محلی و کوتاه‌مدت چند هزار ساله در منابع ثبت نشده‌اند. برخی تاریخ‌ها و روایت‌ها نیز محل اختلاف پژوهشگران‌اند. برای دیدن شرح هر رویداد، عنوان را باز کنید.</p><p><strong>تعداد مدخل‌ها: 41</strong></p></div><input id="search" class="search" placeholder="🔍 جست‌وجو بر اساس نام، دوره یا کشور..." oninput="searchEvents()"><div id="eventList"><details class="event"><summary>1. نبردهای ایلام با آشور و بابل (هزاره دوم تا سده هفتم پ.م.)</summary><p>ایلامیان در جنوب‌غرب فلات ایران بارها با دولت‌های میان‌رودان، به‌ویژه آشور و بابل، جنگیدند. رقابت بر سر شوش، راه‌های بازرگانی و نفوذ منطقه‌ای از عوامل اصلی بود. یورش آشوربانیپال در سده هفتم پ.م. به ویرانی شوش انجامید و قدرت سیاسی ایلام را به‌شدت کاهش داد.</p><p><strong>برای بررسی:</strong> تاریخ این رویداد را باید در پیوند با شرایط سیاسی، اقتصادی و جغرافیایی زمان خود مطالعه کرد. در مواردی که منابع اختلاف دارند، تاریخ تقریبی یا روایت‌های متفاوت باید جداگانه سنجیده شوند.</p></details>
@@ -72,6 +118,64 @@ const quizData=[['جنگ ایران و عراق در چه سالی آغاز شد
 function renderQuiz(){let h=document.getElementById('questions');quizData.forEach((q,i)=>{let d=document.createElement('div');d.className='question';d.innerHTML='<h3>'+(i+1)+'. '+q[0]+'</h3>'+q[1].map((a,j)=>'<label class="option"><input type="radio" name="q'+i+'" value="'+j+'"> '+a+'</label>').join('');h.appendChild(d)})}
 function checkQuiz(){let score=0,answered=0;quizData.forEach((q,i)=>{let x=document.querySelector('input[name="q'+i+'"]:checked');if(x){answered++;if(+x.value===q[2])score++}});let r=document.getElementById('result');r.style.display='block';r.innerHTML='پاسخ داده‌شده: '+answered+' از ۱۰<br>پاسخ درست: '+score+' از ۱۰<br><strong>نمره: '+(score*2)+' از ۲۰</strong>'+(answered<10?'<br>برای نتیجه کامل به همه پرسش‌ها پاسخ بده.':'')}
 function resetQuiz(){setTimeout(()=>document.getElementById('result').style.display='none',0)}renderQuiz();
+
+// افکت ظاهرشدن کارت‌ها هنگام ورود به صفحه
+function setupReveal(){
+  const targets=document.querySelectorAll('.card,.event,.sources,.section-title');
+  targets.forEach(el=>el.classList.add('reveal'));
+  if(!('IntersectionObserver' in window)){targets.forEach(el=>el.classList.add('visible'));return}
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}
+    });
+  },{threshold:.08});
+  targets.forEach(el=>observer.observe(el));
+}
+const originalShowPage=showPage;
+showPage=function(id,btn){
+  originalShowPage(id,btn);
+  setTimeout(setupReveal,60);
+};
+setupReveal();
+
+// ذرات نورانی شناور در پس‌زمینه
+(function(){
+  const canvas=document.getElementById('particleCanvas');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  if(!ctx)return;
+  let w=0,h=0,particles=[];
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function resize(){
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    w=window.innerWidth;h=window.innerHeight;
+    canvas.width=Math.floor(w*dpr);canvas.height=Math.floor(h*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const count=Math.min(55,Math.max(18,Math.floor(w/25)));
+    particles=Array.from({length:count},()=>({
+      x:Math.random()*w,y:Math.random()*h,
+      r:Math.random()*2+0.6,
+      vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28-.08,
+      a:Math.random()*.45+.12
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    const dark=document.body.classList.contains('dark');
+    for(const p of particles){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-5)p.x=w+5;if(p.x>w+5)p.x=-5;
+      if(p.y<-5)p.y=h+5;if(p.y>h+5)p.y=-5;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=dark?`rgba(217,173,88,${p.a})`:`rgba(45,75,120,${p.a*.55})`;
+      ctx.fill();
+    }
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  resize();window.addEventListener('resize',resize,{passive:true});
+  draw();
+})();
+
 </script></body></html>
 '''
 
